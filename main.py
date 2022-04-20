@@ -25,11 +25,13 @@ results = browser.find_element(by=By.XPATH, value='//*[@id="RESULTS"]')
 results.click()
 
 tree = etree.HTML(browser.page_source)
+unit = tree.xpath('//table[@class="sv-table sv-table-striped"]/tbody/tr/td[2]/text()')
 mark = tree.xpath('//table[@class="sv-table sv-table-striped"]/tbody/tr/td[4]/text()')
 credit = tree.xpath('//table[@class="sv-table sv-table-striped"]/tbody/tr/td[6]/text()')
 for i in range(len(mark)):
     mark[i] = float(mark[i].strip())
     credit[i] = float(credit[i].strip())
+    print(unit[i].strip() + '       ' + str(mark[i]) + '       ' + str(credit[i]))
 
 tmp = 0
 for i in range(len(mark)):
